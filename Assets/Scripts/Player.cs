@@ -4,7 +4,8 @@ using JetBrains.Annotations;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{
+{   
+    [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float _speedMultiplier;
     private int _defaultSpeed;
     
@@ -15,7 +16,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        _rigidbody = GetComponent<Rigidbody>();
         Debug.Log("Oyun başlıyor");
     }
 
@@ -24,22 +25,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += Vector3.forward * Time.deltaTime * _speedMultiplier;
-        }
-        
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += Vector3.back * Time.deltaTime * _speedMultiplier;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position += Vector3.left * Time.deltaTime * _speedMultiplier;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += Vector3.right * Time.deltaTime * _speedMultiplier;
+            _rigidbody.linearVelocity = transform.forward * _defaultSpeed;
         }
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
